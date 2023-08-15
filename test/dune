@@ -1,0 +1,3 @@
+(test
+ (libraries ounit qcheck)
+ (name dice2))
