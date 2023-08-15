@@ -1,23 +1,45 @@
 (** Contains the internal core grammar for the discrete language *)
 open Bignum
+open Sexplib.Std
 
-type eexpr =
-    And        of eexpr * eexpr
-  | Or         of eexpr * eexpr
-  | Not        of eexpr
-  | Ite        of eexpr * eexpr * eexpr
+(** core grammar type *)
+type expr =
+    And        of expr * expr
+  | Or         of expr * expr
+  | Not        of expr
+  | Ite        of expr * expr * expr
   | Flip       of Bignum.t
-  | Bind       of string * eexpr * eexpr
-  | Observe    of eexpr
+  | Bind       of string * expr * expr
+  | Observe    of expr
   | Ident      of string
-  | Tup        of eexpr * eexpr
-  | Fst        of eexpr
-  | Snd        of eexpr
+  | Tup        of expr * expr
+  | Fst        of expr
+  | Snd        of expr
   | True
   | False
 [@@deriving sexp_of]
 
-
 (** top-level symbol *)
-type program = { body: eexpr }
+type program = { body: expr }
 [@@deriving sexp_of]
+
+(** convert an expression in the external grammar into one in the internal grammar *)
+let rec from_external_expr (e: Syntax.eexpr) =
+  let f = from_external_expr in
+  match e with
+  | And(_, e1, e2) -> And(f e1, f e2)
+  | Or(_, e1, e2) -> Or(f e1, f e2)
+  | Not(_, e) -> Not(f e)
+  | Ite(_, g, thn, els) -> Ite(f g, f thn, f els)
+  | Flip(_, n) -> Flip(n)
+  | Observe(_, e) -> Observe(f e)
+  | Bind(_, x, e1, e2) -> Bind(x, f e1, f e2)
+  | Ident(_, x) -> Ident(x)
+  | Tup(_, e1, e2) -> Tup(f e1, f e2)
+  | Fst(_, e) -> Fst(f e)
+  | Snd(_, e) -> Snd(f e)
+  | True _ -> True
+  | False _ -> False
+
+(** convert an external program into a core program *)
+let from_external_program (e: Syntax.program) = { body = (from_external_expr e.body) }
