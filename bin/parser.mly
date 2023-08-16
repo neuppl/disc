@@ -42,10 +42,6 @@ expr:
     | (* (e) *) delimited(LPAREN, expr, RPAREN) { $1 }
     | TRUE { True({startpos=$startpos; endpos=$endpos}) }
     | FALSE { False({startpos=$startpos; endpos=$endpos}) }
-    | (* (e, e) *)
-      delimited(LPAREN, separated_pair(expr, COMMA, expr), RPAREN) { Tup({startpos=$startpos; endpos=$endpos}, fst $1, snd $1) }
-    | FST expr { Fst({startpos=$startpos; endpos=$endpos}, $2) }
-    | SND expr { Snd({startpos=$startpos; endpos=$endpos}, $2) }
     | (* x *)ID { Ident({startpos=$startpos; endpos=$endpos}, $1) }
     | (* e && e *) expr AND expr { And({startpos=$startpos; endpos=$endpos}, $1, $3) }
     | (* e || e *) expr OR expr { Or({startpos=$startpos; endpos=$endpos}, $1, $3) }

@@ -30,9 +30,6 @@ type eexpr =
   | Bind of source * string * eexpr * eexpr
   | Observe of source * eexpr
   | Ident of source * string
-  | Tup of source * eexpr * eexpr
-  | Fst of source * eexpr
-  | Snd of source * eexpr
   | True of source
   | False of source
 [@@deriving sexp_of]

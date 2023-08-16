@@ -11,9 +11,9 @@ e ::=
    | flip q                         // q is a rational value
    | if e then e else e
    | return e
-   | (e, e) | fst e | snd e
    | true | false
-   | e and e | e or e | ! e |
+   | e && e | e && e | ! e |
+   | ( e )
 
 p ::= e
 ```
