@@ -1,3 +1,3 @@
 (test
- (libraries ounit qcheck)
+ (libraries disc ounit qcheck)
  (name disc))

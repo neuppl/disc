@@ -1,3 +1,7 @@
+(** defines the lexer used for defining all symbols during parsing
+  * this file contains many more symbols than necessary; they can be ignored
+  * see https://dev.realworldocaml.org/parsing-with-ocamllex-and-menhir.html
+  *)
 {
 open Lexing
 open Parser
@@ -10,8 +14,6 @@ let next_line lexbuf =
     { pos with pos_bol = lexbuf.lex_curr_pos;
                pos_lnum = pos.pos_lnum + 1
     }
-
-
 }
 
 let int = '-'? ['0'-'9'] ['0'-'9']*
@@ -65,6 +67,7 @@ rule token =
     | "in"                      { IN }
     | "iterate"                 { ITERATE }
     | "uniform"                 { UNIFORM }
+    | "return"                  { RETURN }
     | "binomial"                { BINOMIAL }
     | "observe"                 { OBSERVE }
     | "flip"                    { FLIP }

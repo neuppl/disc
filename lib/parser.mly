@@ -1,3 +1,5 @@
+(** defines the core parser
+  * see https://dev.realworldocaml.org/parsing-with-ocamllex-and-menhir.html *)
 %{
   open Syntax
 %}
@@ -11,7 +13,7 @@
 %token IF THEN ELSE TRUE FALSE IN INT
 %token SEMICOLON COMMA COLON
 %token LET OBSERVE FLIP LBRACE RBRACE FST SND FUN BOOL ITERATE UNIFORM BINOMIAL
-%token LIST LBRACKET RBRACKET CONS HEAD TAIL LENGTH BIND
+%token LIST LBRACKET RBRACKET CONS HEAD TAIL LENGTH BIND RETURN
 
 %token <int>    INT_LIT
 %token <string> FLOAT_LIT
@@ -51,6 +53,8 @@ expr:
     | (* if e then e else e *) IF expr THEN expr ELSE expr { Ite({startpos=$startpos; endpos=$endpos}, $2, $4, $6) }
     | (* x <- e; e *)
       ID BIND expr SEMICOLON expr { Bind({startpos=$startpos; endpos=$endpos}, $1, $3, $5) }
+    | (* return e *)
+      RETURN expr { Return({startpos=$startpos; endpos=$endpos}, $2) }
 
 
 program:

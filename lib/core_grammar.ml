@@ -11,6 +11,7 @@ type expr =
   | Bind       of string * expr * expr
   | Observe    of expr
   | Ident      of string
+  | Return     of expr
   | True
   | False
 [@@deriving sexp_of]
@@ -23,16 +24,17 @@ type program = { body: expr }
 let rec from_external_expr (e: Syntax.eexpr) =
   let f = from_external_expr in
   match e with
-  | And(_, e1, e2) -> And(f e1, f e2)
-  | Or(_, e1, e2) -> Or(f e1, f e2)
-  | Not(_, e) -> Not(f e)
+  | And(_, e1, e2)      -> And(f e1, f e2)
+  | Or(_, e1, e2)       -> Or(f e1, f e2)
+  | Not(_, e)           -> Not(f e)
   | Ite(_, g, thn, els) -> Ite(f g, f thn, f els)
-  | Flip(_, n) -> Flip(n)
-  | Observe(_, e) -> Observe(f e)
-  | Bind(_, x, e1, e2) -> Bind(x, f e1, f e2)
-  | Ident(_, x) -> Ident(x)
-  | True _ -> True
-  | False _ -> False
+  | Flip(_, n)          -> Flip(n)
+  | Observe(_, e)       -> Observe(f e)
+  | Return(_, e)        -> Return(f e)
+  | Bind(_, x, e1, e2)  -> Bind(x, f e1, f e2)
+  | Ident(_, x)         -> Ident(x)
+  | True _              -> True
+  | False _             -> False
 
 (** convert an external program into a core program *)
 let from_external_program (e: Syntax.program) = { body = (from_external_expr e.body) }

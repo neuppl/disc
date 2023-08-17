@@ -1,11 +1,6 @@
-(menhir
-  (modules parser))
-
-(ocamllex lexer)
-
 (executable
- (public_name dice2)
+ (public_name disc)
  (name main)
  (preprocess (pps ppx_jane))
- (libraries dice2 core bignum sexplib core_unix.command_unix))
+ (libraries disc core bignum sexplib core_unix.command_unix))
 
