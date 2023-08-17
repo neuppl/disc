@@ -1,5 +1,4 @@
 (** Contains the internal core grammar for the discrete language *)
-open Bignum
 open Sexplib.Std
 
 (** core grammar type *)
@@ -12,9 +11,6 @@ type expr =
   | Bind       of string * expr * expr
   | Observe    of expr
   | Ident      of string
-  | Tup        of expr * expr
-  | Fst        of expr
-  | Snd        of expr
   | True
   | False
 [@@deriving sexp_of]
@@ -35,9 +31,6 @@ let rec from_external_expr (e: Syntax.eexpr) =
   | Observe(_, e) -> Observe(f e)
   | Bind(_, x, e1, e2) -> Bind(x, f e1, f e2)
   | Ident(_, x) -> Ident(x)
-  | Tup(_, e1, e2) -> Tup(f e1, f e2)
-  | Fst(_, e) -> Fst(f e)
-  | Snd(_, e) -> Snd(f e)
   | True _ -> True
   | False _ -> False
 
