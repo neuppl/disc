@@ -48,8 +48,8 @@ expr:
     | (* e && e *) expr AND expr { And({startpos=$startpos; endpos=$endpos}, $1, $3) }
     | (* e || e *) expr OR expr { Or({startpos=$startpos; endpos=$endpos}, $1, $3) }
     | (* !e *) NOT expr { Not({startpos=$startpos; endpos=$endpos}, $2) }
-    | (* flip num *) FLIP LPAREN num RPAREN { Flip({startpos=$startpos; endpos=$endpos}, $3) }
-    | (* observe e *) OBSERVE expr { Observe({startpos=$startpos; endpos=$endpos}, $2) }
+    | (* flip num *) FLIP num { Flip({startpos=$startpos; endpos=$endpos}, $2) }
+    | (* observe e; e *) OBSERVE expr SEMICOLON expr { Observe({startpos=$startpos; endpos=$endpos}, $2, $4) }
     | (* if e then e else e *) IF expr THEN expr ELSE expr { Ite({startpos=$startpos; endpos=$endpos}, $2, $4, $6) }
     | (* x <- e; e *)
       ID BIND expr SEMICOLON expr { Bind({startpos=$startpos; endpos=$endpos}, $1, $3, $5) }

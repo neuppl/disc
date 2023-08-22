@@ -29,7 +29,7 @@ type eexpr =
   | Flip of source * Bignum.t
   | Bind of source * string * eexpr * eexpr
   | Return of source * eexpr
-  | Observe of source * eexpr
+  | Observe of source * eexpr * eexpr
   | Ident of source * string
   | True of source
   | False of source

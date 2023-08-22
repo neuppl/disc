@@ -84,8 +84,8 @@ rule token =
     | ';'                       { SEMICOLON }
     | ':'                       { COLON }
     | ','                       { COMMA }
-    | int as i                  { INT_LIT(int_of_string i); }
     | float as num              { FLOAT_LIT(num); }
+    | int as i                  { INT_LIT(int_of_string i); }
     | id as ident               { ID(ident); }
     | eof                       { EOF }
 and comment =
