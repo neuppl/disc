@@ -18,7 +18,7 @@ type expr =
 
 (* Substituting string i in expr e with expr f *)
 let rec subst (e : expr) (f : expr) (i : string) : expr = match e with
-  | Ident(s)          -> if s == i then f else Ident(s)
+  | Ident(s)          -> if s = i then f else Ident(s)
   (* The rest are super easy recursion *)
   | And(e1, e2)       -> And(subst e1 f i, subst e2 f i)
   | Or(e1, e2)        -> Or(subst e1 f i, subst e2 f i)
