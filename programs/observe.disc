@@ -1,0 +1,4 @@
+x <- flip 0.6; 
+y <- flip 0.3;
+observe x || y;
+return x
