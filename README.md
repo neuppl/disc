@@ -1,12 +1,32 @@
 A tiny discrete language.
 
+# What's inside
+
+* `bin/` defines the binary. You shouldn't need to change anything here.
+* `lib`: contains the core of the codebase
+  - `syntax.ml`: defines the external user-facing grammar, which is the parser target
+  - `core_grammar.ml`: contains an internal grammar that is desugared from the external
+    grammar. This is the main grammar that you will be interacting with. It has a function `subst` that lets you substitute expressions in for free variables in a superexpression. 
+  - `lexer.mll` and `parser.mly`: these define the parser and lexer for the project using [menhir](https://dev.realworldocaml.org/parsing-with-ocamllex-and-menhir.html). You do 
+  not need to edit these files for the project.
+  - `enumerate.ml` is where you'll implement the exhaustive enumeration big-step semantics.
+  - `kc.ml` is where you'll imlpement the Boolean compilation semantics.
+  - `util.ml` contains various convenience utilities used across different parts of the library
+* `programs/`: contains sample programs for you to tinker with.
+* `tests/`: contains the test suite.
+
 # Building
 
 Make sure you have OCaml (<5.0.0), opam, dune. They can be all installed through a package manager of your choice. 
 
 opam dependencies: menhir, ounit, qcheck, bignum, core, core_unix
 
-After cloning, `cd` into the folder and run `dune build`.
+After cloning, `cd` into the folder and run `opam install . --deps-only` to install dependencies. Then run `dune build`.
+
+# Running
+
+After you build, an executable will be available under `_build/`. You can also do `dune exec -- disc $FILE $FLAGS`.
+Try it out with some of the sample programs in the `programs` folder, with no flags raised. It should say that the program parsed, but no inference strategy was selected. 
 
 # **Syntax**
 
@@ -20,7 +40,7 @@ e ::=
    | if e then e else e
    | return e
    | true | false
-   | e && e | e && e | ! e |
+   | e && e | e || e | ! e |
    | ( e )
 
 p ::= e
