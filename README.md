@@ -21,11 +21,13 @@ Make sure you have OCaml (<5.0.0), opam, dune. They can be all installed through
 
 opam dependencies: menhir, ounit, qcheck, bignum, core, core_unix
 
-After cloning, `cd` into the folder and run `opam install . --deps-only` to install dependencies. Then run `dune build`.
+After cloning, `cd` into the folder and run `opam install . --deps-only` to install dependencies. 
+
+Then follow the instructions given in [rsdd-ocaml](https://github.com/neuppl/rsdd-ocaml) to use its library functions. 
 
 # Running
 
-After you build, an executable will be available under `_build/`. You can also do `dune exec -- disc $FILE $FLAGS`.
+After you build using `dune build`, an executable will be available under `_build/`. Alternatively, you can also do `dune exec -- disc $FILE $FLAGS`.
 Try it out with some of the sample programs in the `programs` folder, with no flags raised. It should say that the program parsed, but no inference strategy was selected. 
 
 # **Syntax**
