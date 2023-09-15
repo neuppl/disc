@@ -5,5 +5,5 @@
 
 (library
  (preprocess (pps ppx_jane))
- (libraries core bignum sexplib core_unix.command_unix)
+ (libraries core bignum sexplib core_unix.command_unix oUnit rsdd)
  (name disc))
