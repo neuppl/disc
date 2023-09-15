@@ -25,6 +25,8 @@ After cloning, `cd` into the folder and run `opam install . --deps-only` to inst
 
 Then follow the instructions given in [rsdd-ocaml](https://github.com/neuppl/rsdd-ocaml) to use its library functions. 
 
+Then run `dune build`. If it gives errors on missing packages, install them using `opam install $PACKAGE_NAME`.
+
 # Running
 
 After you build using `dune build`, an executable will be available under `_build/`. Alternatively, you can also do `dune exec -- disc $FILE $FLAGS`.
