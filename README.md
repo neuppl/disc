@@ -32,6 +32,10 @@ Then run `dune build`. If it gives errors on missing packages, install them usin
 After you build using `dune build`, an executable will be available under `_build/`. Alternatively, you can also do `dune exec -- disc $FILE $FLAGS`.
 Try it out with some of the sample programs in the `programs` folder, with no flags raised. It should say that the program parsed, but no inference strategy was selected. 
 
+# Testing
+
+After you implement both inference strategies, you can compare values using `dune test`. 
+
 # **Syntax**
 
 The top-level syntax is in monadic-style:
