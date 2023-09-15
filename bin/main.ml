@@ -1,6 +1,7 @@
 (** main entry point *)
 open Disc
 open Util
+open Core
 
 (***********************************************************************************)
 (* command line arguments                                                          *)
