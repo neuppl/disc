@@ -21,7 +21,7 @@
  (name disc)
  (synopsis "Disc: A Tiny Discrete Probabilistic Programming Language")
  (description "")
- (depends ocaml dune core menhir ounit qcheck bignum)
+ (depends ocaml dune core core_unix menhir ounit qcheck bignum)
  (tags
   (topics "to describe" your project)))
 
