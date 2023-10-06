@@ -1,6 +1,6 @@
 A tiny discrete language.
 
-# What's inside
+## What's inside
 
 * `bin/` defines the binary. You shouldn't need to change anything here.
 * `lib`: contains the core of the codebase
@@ -10,33 +10,31 @@ A tiny discrete language.
   - `lexer.mll` and `parser.mly`: these define the parser and lexer for the project using [menhir](https://dev.realworldocaml.org/parsing-with-ocamllex-and-menhir.html). You do 
   not need to edit these files for the project.
   - `enumerate.ml` is where you'll implement the exhaustive enumeration big-step semantics.
-  - `kc.ml` is where you'll imlpement the Boolean compilation semantics.
+  - `kc.ml` is where you'll implement the Boolean compilation semantics.
   - `util.ml` contains various convenience utilities used across different parts of the library
 * `programs/`: contains sample programs for you to tinker with.
 * `tests/`: contains the test suite.
 
-# Building
+## Building
 
-Make sure you have OCaml (<5.0.0), opam, dune. They can be all installed through a package manager of your choice. 
+Make sure you have OCaml (<5.0.0), opam, and dune. They can be all installed through a package manager of your choice. 
 
-opam dependencies: menhir, ounit, qcheck, bignum, core, core_unix
+opam dependencies: `menhir`, `ounit`, `qcheck`, `bignum`, `core`, `core_unix`, `rsdd`
 
 After cloning, `cd` into the folder and run `opam install . --deps-only` to install dependencies. 
 
-Then follow the instructions given in [rsdd-ocaml](https://github.com/neuppl/rsdd-ocaml) to use its library functions. 
-
 Then run `dune build`. If it gives errors on missing packages, install them using `opam install $PACKAGE_NAME`.
 
-# Running
+## Running
 
 After you build using `dune build`, an executable will be available under `_build/`. Alternatively, you can also do `dune exec -- disc $FILE $FLAGS`.
 Try it out with some of the sample programs in the `programs` folder, with no flags raised. It should say that the program parsed, but no inference strategy was selected. 
 
-# Testing
+## Testing
 
 After you implement both inference strategies, you can compare values using `dune test`. 
 
-# **Syntax**
+## **Syntax**
 
 The top-level syntax is in monadic-style:
 
